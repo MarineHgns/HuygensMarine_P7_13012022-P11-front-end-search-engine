@@ -1,0 +1,57 @@
+body {
+  margin: auto;
+  font-family: "Lato", sans-serif;
+}
+
+header {
+  margin-top: 2.5em;
+}
+
+nav {
+  max-width: 75%;
+  margin: auto;
+}
+
+.logo {
+  display: block;
+  margin: auto;
+  padding-bottom: 0.4em;
+  transform: rotate(0deg) scale(1);
+  transition: 2s;
+}
+
+.logo1 {
+  animation: test 3s backwards;
+}
+
+@keyframes test {
+  from {
+    transform: rotate(180deg) scale(1);
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+input ::placeholder {
+  font-family: "Lato", sans-serif;
+}
+
+#search {
+  width: 100%;
+  font-family: "Lato", sans-serif;
+  background-color: #e7e7e7;
+  border: none;
+  border-radius: 3px;
+  height: 55px;
+  padding: 15px;
+  outline: none;
+  margin-top: 0.5em;
+  font-weight: 500;
+}
+
+.fa-search {
+  position: absolute;
+  right: 14%;
+  top: 12.2em;
+}
