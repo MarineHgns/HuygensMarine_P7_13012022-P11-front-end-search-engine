@@ -8,8 +8,8 @@ header {
 }
 
 nav {
-  max-width: 75%;
   margin: auto;
+  max-width: 75%;
 }
 
 .logo {
@@ -42,8 +42,8 @@ input ::placeholder {
   font-family: "Lato", sans-serif;
   background-color: #e7e7e7;
   border: none;
-  border-radius: 3px;
-  height: 55px;
+  border-radius: 5px;
+  height: 69px;
   padding: 15px;
   outline: none;
   margin-top: 0.5em;
@@ -53,5 +53,134 @@ input ::placeholder {
 .fa-search {
   position: absolute;
   right: 14%;
-  top: 12.2em;
+  top: 12.4em;
+}
+
+#tagList {
+  display: flex;
+  flex-direction: row;
+}
+
+#listTagIngredient {
+  background: #3282f7;
+}
+
+#listTagAppareil {
+  background: #68d9a4;
+}
+
+#listTagUstensile {
+  background: #ed6454;
+}
+
+#box-ingredients {
+  background: #3282f7;
+}
+
+.tag {
+  font-weight: 600;
+  font-size: 0.75em;
+  transition: all 1s;
+  padding: 0.5em 1.2em;
+  color: white;
+  margin-top: 1.5em;
+  border-radius: 3px;
+}
+
+.boxList {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  font-weight: 600;
+  font-size: 0.75em;
+  width: 87px;
+  min-width: initial;
+  max-width: 397px;
+  height: 19.7px;
+  transition: all 1s;
+  padding: 1em;
+  padding-top: 1.3em;
+  color: white;
+  margin-top: 1.5em;
+  margin-right: 0.8em;
+  margin-bottom: -0.5em;
+  border-radius: 3px;
+  cursor: initial;
+}
+
+.fa-chevron-up {
+  transform: rotate(180deg);
+  margin-left: auto;
+  margin-right: 0.5em;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.list {
+  display: none;
+  overflow: auto;
+  width: 100%;
+  height: 90%;
+  margin-top: 1.5em;
+  flex-wrap: wrap;
+  align-content: space-between;
+  flex-direction: column;
+  transition: all 0.3s;
+}
+
+#box-appareils {
+  background: #68d9a4;
+}
+
+#box-ustensiles {
+  background: #ed6454;
+}
+
+.recipes {
+  margin-top: 1.5em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  transition: all 0.5s;
+}
+
+main {
+  margin: auto;
+  max-width: 75%;
+  transform: rotate(0deg) scale(1);
+}
+
+article {
+  min-width: 270px;
+  max-width: 360px;
+  height: 364px;
+  background: #c7bebe;
+  border-radius: 3px;
+  font-family: "Lato";
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-top: 2em;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.plate {
+  width: 100%;
+  min-width: 270px;
+  max-width: 360px;
+  height: 180px;
+  border-radius: 3px;
+  transition: all 0.5s;
+}
+
+.description {
+  max-height: 100px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.card {
+  padding-left: 1em;
 }

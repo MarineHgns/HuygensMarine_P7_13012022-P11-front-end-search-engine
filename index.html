@@ -21,10 +21,48 @@
     </header>
     <nav>
         <div class="searchbar">
-        <input type="search" name="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" id="search" autocomplete='off' aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette">
-        <i class="fas fa-search"></i>
+            <input type="search" name="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" id="search" autocomplete='off' aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette">
+                <i class="fas fa-search">
+                </i>
+        </div>
+
+        <div id="tagList">
+            <div id="listTagIngredient" class="tag" style="display: none;">
+                test
+            </div>
+            <div id="listTagAppareil" class="tag" style="display: none;">
+            </div>
+            <div id="listTagUstensile" class="tag" style="display: none;">
+            </div>
+        </div>
+        <div id="box-ingredients" class="boxList" tabindex="0">
+                <span class="list-ingredients">Ingrédients</span>
+                    <i class="fas fa-chevron-up">
+                    </i>
+                <div id="listIngredients" class="list">
+                </div>
+        </div>
+        <div id="box-appareils" class="boxList" tabindex="0">
+            <span class="list-appareils">Appareils</span>
+                <i class="fas fa-chevron-up">
+                </i>
+            <div id="listAppareils" class="list">
+            </div>
+        </div>
+        <div id="box-ustensiles" class="boxList" tabindex="0">
+            <span class="list-ustensiles">Ustensiles</span>
+                <i class="fas fa-chevron-up">
+                </i>
+            <div id="listUstensiles" class="list">
+            </div>
         </div>
     </nav>
- <script src="./scripts/index.js"></script>   
+    <main>
+        <div class="recipes">
+        </div>
+
+    </main>
+ <script src="./scripts/index.js" type="module"></script>
+
 </body>
 </html>
