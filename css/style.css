@@ -21,10 +21,10 @@ nav {
 }
 
 .logo1 {
-  animation: test 3s backwards;
+  animation: rotateLogo 3s backwards;
 }
 
-@keyframes test {
+@keyframes rotateLogo {
   from {
     transform: rotate(180deg) scale(1);
   }
@@ -136,7 +136,7 @@ input ::placeholder {
   background: #ed6454;
 }
 
-.recipes {
+#recipes {
   margin-top: 1.5em;
   display: flex;
   justify-content: space-between;
@@ -150,7 +150,7 @@ main {
   transform: rotate(0deg) scale(1);
 }
 
-article {
+.article {
   min-width: 270px;
   max-width: 360px;
   height: 364px;
@@ -158,8 +158,8 @@ article {
   border-radius: 3px;
   font-family: "Lato";
   font-size: 0.8em;
-  font-weight: 600;
   margin-top: 2em;
+  margin-bottom: 2em;
   display: inline-block;
   cursor: pointer;
   transition: all 0.5s;
@@ -174,13 +174,66 @@ article {
   transition: all 0.5s;
 }
 
+.card {
+  max-width: 360px;
+  padding-left: 1.4em;
+  padding-right: 1.4em;
+}
+
+.header-recipe {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1em;
+}
+
+.name-recipe {
+  font-size: 1.2em;
+}
+
+.time {
+  font-weight: 900;
+  font-size: 1.2em;
+}
+
+.fa-clock {
+  padding-right: 0.2em;
+}
+
 .description {
-  max-height: 100px;
+  white-space: wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 110px;
+  max-height: 120px;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.body-recipe {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+}
+
+.recipe-ingredients {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  max-width: 165px;
+  max-height: 120px;
 }
 
-.card {
-  padding-left: 1em;
+.fa-chevron-up:hover {
+  animation: chevronRotate 2s ease-in-out;
+}
+
+@keyframes chevronRotate {
+  from {
+    transform: rotate(180deg) scale(1.5);
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+  }
 }
