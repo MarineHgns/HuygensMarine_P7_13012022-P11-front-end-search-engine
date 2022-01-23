@@ -108,24 +108,48 @@ input ::placeholder {
   cursor: initial;
 }
 
-.fa-chevron-up {
-  transform: rotate(180deg);
+.boxList:hover {
+  height: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+.fa-chevron-down {
+  animation: chevronRotate 2s backwards;
   margin-left: auto;
   margin-right: 0.5em;
   cursor: pointer;
   transition: all 0.4s;
 }
 
+.fa-chevron-down:hover {
+  animation: chevronRotate 2s backwards;
+  transform: rotate(180deg);
+}
+
+@keyframes chevronRotate {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.hide {
+  display: none;
+}
+
 .list {
   display: none;
-  overflow: auto;
   width: 100%;
   height: 90%;
   margin-top: 1.5em;
   flex-wrap: wrap;
   align-content: space-between;
-  flex-direction: column;
-  transition: all 0.3s;
+  flex-direction: row;
 }
 
 #box-appareils {
