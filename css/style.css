@@ -24,6 +24,10 @@ nav {
   animation: rotateLogo 3s backwards;
 }
 
+.logo1:hover {
+  transform: rotate(360deg);
+}
+
 @keyframes rotateLogo {
   from {
     transform: rotate(180deg) scale(1);
@@ -73,10 +77,6 @@ input ::placeholder {
   background: #ed6454;
 }
 
-#box-ingredients {
-  background: #3282f7;
-}
-
 .tag {
   font-weight: 600;
   font-size: 0.75em;
@@ -110,10 +110,87 @@ input ::placeholder {
 
 .boxList:hover {
   height: 100%;
+  z-index: 10;
+  position: relative;
+}
+
+#listUstensiles {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#listAppareils {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#listIngredients {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.padding {
+  padding-bottom: 0.4em;
 }
 
 li {
   list-style: none;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-size: 1.2em;
+  font-weight: 500;
+  padding-top: 1em;
+  padding-left: 0.8em;
+}
+
+li:hover {
+  transform: scale(1.1);
+  color: rgba(255, 255, 255, 0.74);
+  padding-left: 1.4em;
+}
+
+#search-ingredients {
+  position: absolute;
+  max-width: 100%;
+  border: none;
+  background-color: #3282f7;
+  color: white;
+  font-size: 1.6em;
+  padding-left: 0.5em;
+  font-weight: 500;
+}
+
+#search-ingredients::placeholder {
+  color: rgba(255, 255, 255, 0.733);
+  border: #3282f7 solid 1px;
+}
+
+#search-appareils {
+  position: absolute;
+  max-width: 100%;
+  border: none;
+  background-color: #68d9a4;
+  color: white;
+  font-size: 1.6em;
+  padding-left: 0.5em;
+  font-weight: 500;
+}
+
+#search-appareils::placeholder {
+  color: rgba(255, 255, 255, 0.733);
+  border: #68d9a4 solid 1px;
+}
+
+#search-ustensils {
+  position: absolute;
+  max-width: 100%;
+  border: none;
+  background-color: #ed6454;
+  color: white;
+  font-size: 1.6em;
+  padding-left: 0.5em;
+  font-weight: 500;
+}
+
+#search-ustensils::placeholder {
+  color: rgba(255, 255, 255, 0.733);
+  border: #ed6454 solid 1px;
 }
 
 .fa-chevron-down {
@@ -152,12 +229,44 @@ li {
   flex-direction: row;
 }
 
+#box-ingredients {
+  background: #3282f7;
+}
+
+#box-ingredients:hover {
+  background: #3282f7;
+  min-width: 50%;
+  margin-bottom: -29em;
+  z-index: 1;
+}
+
 #box-appareils {
   background: #68d9a4;
 }
 
+#box-appareils:hover {
+  background: #68d9a4;
+  min-width: 40%;
+  margin-bottom: -29em;
+  z-index: 1;
+}
+
 #box-ustensiles {
   background: #ed6454;
+}
+
+#box-ustensiles:hover {
+  background: #ed6454;
+  min-width: 50%;
+  margin-bottom: -29em;
+  z-index: 1;
+}
+
+/* -------- recipes ------------- */
+main {
+  margin: auto;
+  max-width: 75%;
+  transform: rotate(0deg) scale(1);
 }
 
 #recipes {
@@ -166,12 +275,8 @@ li {
   justify-content: space-between;
   flex-wrap: wrap;
   transition: all 0.5s;
-}
-
-main {
-  margin: auto;
-  max-width: 75%;
-  transform: rotate(0deg) scale(1);
+  position: fixed;
+  z-index: -99999;
 }
 
 .article {
@@ -189,6 +294,12 @@ main {
   transition: all 0.5s;
 }
 
+.card {
+  max-width: 360px;
+  padding-left: 1.4em;
+  padding-right: 1.4em;
+}
+
 .plate {
   width: 100%;
   min-width: 270px;
@@ -196,12 +307,6 @@ main {
   height: 180px;
   border-radius: 3px;
   transition: all 0.5s;
-}
-
-.card {
-  max-width: 360px;
-  padding-left: 1.4em;
-  padding-right: 1.4em;
 }
 
 .header-recipe {
@@ -247,17 +352,4 @@ main {
   overflow: hidden;
   max-width: 165px;
   max-height: 120px;
-}
-
-.fa-chevron-up:hover {
-  animation: chevronRotate 2s ease-in-out;
-}
-
-@keyframes chevronRotate {
-  from {
-    transform: rotate(180deg) scale(1.5);
-  }
-  to {
-    transform: rotate(0deg) scale(1);
-  }
 }

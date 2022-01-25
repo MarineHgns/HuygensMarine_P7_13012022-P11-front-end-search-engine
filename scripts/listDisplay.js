@@ -84,3 +84,45 @@ ustensilsTags.forEach((element) => {
   const domAppliances = listTag(element, "appliance");
   searchlistIngredients.append(domAppliances);
 });
+
+// list + search display on mouseover
+// ingredients
+document.querySelector("#box-ingredients").addEventListener("mouseover", () => {
+  document.querySelector("#search-ingredients").style.display = "block";
+  document.querySelector("#listIngredients").style.display = "grid";
+  document.querySelector(".list-ingredients").style.display = "none";
+});
+
+document
+  .querySelector("#box-ingredients")
+  .addEventListener("mouseleave", () => {
+    document.querySelector("#search-ingredients").style.display = "none";
+    document.querySelector("#listIngredients").style.display = "none";
+    document.querySelector(".list-ingredients").style.display = "block";
+  });
+
+// appliances
+document.querySelector("#box-appareils").addEventListener("mouseover", () => {
+  document.querySelector("#search-appareils").style.display = "block";
+  document.querySelector("#listAppareils").style.display = "grid";
+  document.querySelector(".list-appareils").style.display = "none";
+});
+
+document.querySelector("#box-appareils").addEventListener("mouseleave", () => {
+  document.querySelector("#search-appareils").style.display = "none";
+  document.querySelector("#listAppareils").style.display = "none";
+  document.querySelector(".list-appareils").style.display = "block";
+});
+
+// ustensils
+document.querySelector("#box-ustensiles").addEventListener("mouseover", () => {
+  document.querySelector("#search-ustensils").style.display = "block";
+  document.querySelector("#listUstensiles").style.display = "grid";
+  document.querySelector(".list-ustensiles").style.display = "none";
+});
+
+document.querySelector("#box-ustensiles").addEventListener("mouseleave", () => {
+  document.querySelector("#search-ustensils").style.display = "none";
+  document.querySelector("#listUstensiles").style.display = "none";
+  document.querySelector(".list-ustensiles").style.display = "block";
+});
