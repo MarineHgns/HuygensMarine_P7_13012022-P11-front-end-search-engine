@@ -48,6 +48,7 @@ export function elementsTag(recipes, elementTag) {
 // // display element in the box
 function listTag(item, element) {
   const wrapper = document.createElement("li");
+  wrapper.classList.add(`search-item-${element}`);
   wrapper.innerText = item.charAt(0).toUpperCase() + item.slice(1);
 
   return wrapper;
@@ -75,13 +76,13 @@ applianceTags.forEach((element) => {
   searchlistIngredients.append(domAppliances);
 });
 
-// // add element ustensils in his box
+// add element ustensils in his box
 const ustensilsTags = elementsTag(recipes, "ustensils");
 ustensilsTags.forEach((element) => {
   let ingredientsBoxList = document.querySelector("#listUstensiles");
   ingredientsBoxList.style.display = "block";
   const searchlistIngredients = document.querySelector("#listUstensiles");
-  const domAppliances = listTag(element, "appliance");
+  const domAppliances = listTag(element, "ustensils");
   searchlistIngredients.append(domAppliances);
 });
 

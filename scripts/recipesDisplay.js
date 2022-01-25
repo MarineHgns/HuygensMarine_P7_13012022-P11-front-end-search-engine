@@ -1,12 +1,9 @@
-import { recipes } from "../recipes.js";
-
-export default class Recipes {
-  recipeFactory(recipes, recipeCardTemplate) {
+export default function recipeFactory(recipes, recipeCardTemplate) {
+  function createCardRecipe() {
     const { id, name, ingredients, description, time } = recipes;
     const picture = `assets/plat.jpg`;
 
-    function createCardRecipe() {
-      recipeCardTemplate += `
+    recipeCardTemplate += `
                                 <div class="article ${id}" >
                                     <img src="${picture}" alt="photo de la recette" class="plate">
                                         <div class="card">
@@ -19,18 +16,18 @@ export default class Recipes {
     
                             `;
 
-      for (const ingredient of ingredients) {
-        recipeCardTemplate += `<span class="bold"> ${ingredient.ingredient}</span>`;
-        if (ingredient.quantity) {
-          recipeCardTemplate += `<span class="bold">: ${ingredient.quantity}</span> `;
-        }
-        if (ingredient.unit) {
-          recipeCardTemplate += ` ${ingredient.unit}`;
-        }
-        recipeCardTemplate += `<br>`;
+    for (const ingredient of ingredients) {
+      recipeCardTemplate += `<span class="bold"> ${ingredient.ingredient}</span>`;
+      if (ingredient.quantity) {
+        recipeCardTemplate += `<span class="bold">: ${ingredient.quantity}</span> `;
       }
+      if (ingredient.unit) {
+        recipeCardTemplate += ` ${ingredient.unit}`;
+      }
+      recipeCardTemplate += `<br>`;
+    }
 
-      recipeCardTemplate += `
+    recipeCardTemplate += `
                                                 </div>
                                             <div class="description">${description}</div>
                                         </div>
@@ -39,23 +36,7 @@ export default class Recipes {
                                 </div>
                               `;
 
-      return recipeCardTemplate;
-    }
-
-    return { createCardRecipe };
+    return recipeCardTemplate;
   }
+  return { createCardRecipe };
 }
-
-function displayRecipes() {
-  const recipiesContainer = document.getElementById("recipes");
-  recipiesContainer.innerHTML = "";
-
-  let recipeCardTemplate = "";
-  for (const recipe of recipes) {
-    const recipeModel = new Recipes().recipeFactory(recipe, recipeCardTemplate);
-    recipeCardTemplate = recipeModel.createCardRecipe();
-  }
-  recipiesContainer.innerHTML = recipeCardTemplate;
-}
-
-displayRecipes();

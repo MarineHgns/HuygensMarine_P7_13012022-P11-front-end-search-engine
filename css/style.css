@@ -65,26 +65,36 @@ input ::placeholder {
   flex-direction: row;
 }
 
-#listTagIngredient {
-  background: #3282f7;
-}
-
-#listTagAppareil {
-  background: #68d9a4;
-}
-
-#listTagUstensile {
-  background: #ed6454;
-}
-
 .tag {
   font-weight: 600;
   font-size: 0.75em;
   transition: all 1s;
-  padding: 0.5em 1.2em;
+  padding: 0.5em 0em;
   color: white;
   margin-top: 1.5em;
   border-radius: 3px;
+}
+
+.close-tag {
+  padding-left: 0.3em;
+}
+
+.tag-box {
+  margin: 0.4em;
+  padding: 0.6em;
+  border-radius: 5px;
+}
+
+.tag-ingredient {
+  background: #3282f7;
+}
+
+.tag-appliances {
+  background: #68d9a4;
+}
+
+.tag-ustensils {
+  background: #ed6454;
 }
 
 .boxList {
