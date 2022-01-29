@@ -4,22 +4,22 @@ export default function recipeFactory(recipes, recipeCardTemplate) {
     const picture = `assets/plat.jpg`;
 
     recipeCardTemplate += `
-                                <div class="article ${id}" >
+                                <div class="article ${id}" tabindex="1">
                                     <img src="${picture}" alt="photo de la recette" class="plate">
                                         <div class="card">
                                             <div class="header-recipe">
-                                                <h2 class="name-recipe" title="${name}">${name}</h2>
-                                                <p class="time"><i class="far fa-clock"></i> ${time} min</p> 
+                                                <h2 class="name-recipe" title="${name}" tabindex="1">${name}</h2>
+                                                <p class="time" tabindex="1"><i class="far fa-clock"></i> ${time} min</p> 
                                             </div>
                                         <div class="body-recipe">
-                                            <div class="recipe-ingredients">
+                                            <div class="recipe-ingredients tabindex="1"">
     
                             `;
 
     for (const ingredient of ingredients) {
-      recipeCardTemplate += `<span class="bold"> ${ingredient.ingredient}</span>`;
+      recipeCardTemplate += `<span class="bold" tabindex="1"> ${ingredient.ingredient}</span>`;
       if (ingredient.quantity) {
-        recipeCardTemplate += `<span class="bold">: ${ingredient.quantity}</span> `;
+        recipeCardTemplate += `<span class="bold" tabindex="1">: ${ingredient.quantity}</span> `;
       }
       if (ingredient.unit) {
         recipeCardTemplate += ` ${ingredient.unit}`;
@@ -29,7 +29,7 @@ export default function recipeFactory(recipes, recipeCardTemplate) {
 
     recipeCardTemplate += `
                                                 </div>
-                                            <div class="description">${description}</div>
+                                            <div class="description" tabindex="1">${description}</div>
                                         </div>
                                         </div>
                                     </div>

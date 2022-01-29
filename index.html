@@ -14,14 +14,14 @@
 </head>
 <body>
     <header>
-        <h1>
+        <h1 aria-label="logo Les petits plats" tabindex="1">
             <img class="logo logo1" src="assets/logo1.png" alt="logo les petits plats" aria-label="logo les petits plats"/>
             <img class="logo" src="assets/les_petits_plats.png" alt="logo les petits plats" aria-label="logo les petits plats"/>
         </h1>
     </header>
     <nav>
         <div class="searchbar">
-            <input type="search" name="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" id="search" autocomplete='off' aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette">
+            <input type="search" name="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" tabindex="1" id="search" autocomplete='off' aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette">
                 <i class="fas fa-search">
                 </i>
         </div>
@@ -33,36 +33,37 @@
             <div id="listTagUstensile" class="tag" style="display: none;">
             </div>
         </div>
-        <div id="box-ingredients" class="boxList" tabindex="0">
+        <div id="box-ingredients" class="boxList" tabindex="1">
                 <span class="list-ingredients padding">Ingrédients</span>
-                    <i class="fas fa-chevron-down">
+                    <i class="fas fa-chevron-down movechevron">
                     </i>
                     <input type="text" name="ingredients" id="search-ingredients" class="hide"
                             placeholder="Rechercher un ingredient">
                 <div id="listIngredients" class="list">
                 </div>
         </div>
-        <div id="box-appareils" class="boxList" tabindex="0">
+        <div id="box-appareils" class="boxList" tabindex="1">
             <span class="list-appareils padding">Appareils</span>
-                <i class="fas fa-chevron-down">
+                <i class="fas fa-chevron-down movechevron">
                 </i>
                 <input type="text" name="appliance" id="search-appareils" class="hide"
                             placeholder="Rechercher un appareil">
             <div id="listAppareils" class="list">
             </div>
         </div>
-        <div id="box-ustensiles" class="boxList">
+        <div id="box-ustensiles" class="boxList" tabindex="1">
             <span class="list-ustensiles padding">Ustensiles</span>
-                <i class="fas fa-chevron-down">
+                <i class="fas fa-chevron-down movechevron">
                 </i>
                 <input type="text" name="ustensils" id="search-ustensils" class="hide"
                             placeholder="Rechercher un ustensile">
             <div id="listUstensiles" class="list">
             </div>
         </div>
+        <div id="no-results">Aucune recette ne correspond à votre critère...<br> Vous pouvez chercher "tarte aux pommes", "poisson", etc.</div>
     </nav>
     <main>
-        <div id="recipes">
+        <div id="recipes" tabindex="1">
         </div>
 
     </main>

@@ -2,6 +2,8 @@ import { recipes } from "../recipes.js";
 import { elementsTag } from "./listDisplay.js";
 import recipeFactory from "../scripts/recipesDisplay.js";
 import createBoxTags from "./tagDisplay.js";
+import JumpSearchList from "../scripts/search.js";
+import search from "./search.js";
 
 // Recipes
 function displayRecipes() {
@@ -21,3 +23,5 @@ displayRecipes();
 // Tag
 
 createBoxTags();
+
+JumpSearchList();
