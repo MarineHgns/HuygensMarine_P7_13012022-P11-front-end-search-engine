@@ -12,7 +12,6 @@ export default function createBoxTags() {
       listTagIngredients.push(listItemIngredients[i]);
       tagIng.style.display = "block";
       const tagBox = displayTag(listItemIngredients[i].innerHTML);
-      tagBox.classList.add("tag-ingredient");
       tagIng.appendChild(tagBox);
       removeTag();
     });
@@ -31,7 +30,6 @@ export default function createBoxTags() {
       listTagAppliances.push(listItemAppliances[i]);
       tagApp.style.display = "block";
       const tagBox = displayTag(listItemAppliances[i].innerHTML);
-      tagBox.classList.add("tag-appliances");
       tagApp.appendChild(tagBox);
       removeTag();
     });
@@ -49,7 +47,6 @@ export default function createBoxTags() {
       listTagUstensils.push(listItemUstensils[i]);
       tagUst.style.display = "block";
       const tagBox = displayTag(listItemUstensils[i].innerHTML);
-      tagBox.classList.add("tag-ustensils");
       tagUst.appendChild(tagBox);
       removeTag();
     });
@@ -60,8 +57,7 @@ function displayTag(value) {
   const wrapper = document.createElement("span");
   wrapper.classList.add("tag-box");
 
-  let TagCard = "";
-  TagCard += `
+  let TagCard = `
                   <span>${value}</span>
                   <i class="far fa-times-circle fa-lg close-tag"></i>
                 `;

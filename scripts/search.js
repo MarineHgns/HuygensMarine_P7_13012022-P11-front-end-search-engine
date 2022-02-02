@@ -6,7 +6,7 @@ import recipeFactory from "./recipesDisplay.js";
 export default function JumpSearchList() {
   let searchInput = document.querySelector("#search");
   searchInput.addEventListener("input", filterData);
-  // console.log(recipes);
+
   function filterData(e) {
     let recipesBox = document.querySelector("#recipes");
     recipesBox.innerHTML = "";
@@ -19,9 +19,8 @@ export default function JumpSearchList() {
         el.appliance.toLowerCase().includes(searchedString)
     );
 
-    // new recipeFactory(recipes, recipeCardTemplate).createCardRecipe(
-    //   filteredArr
-    // );
+    new recipeFactory(recipes, recipeCardTemplate, filteredArr),
+      createCardRecipe(filteredArr);
   }
 }
 
