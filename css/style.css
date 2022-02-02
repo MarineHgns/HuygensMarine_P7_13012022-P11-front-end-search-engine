@@ -134,6 +134,43 @@ input ::placeholder {
 
 #listIngredients {
   grid-template-columns: 1fr 1fr 1fr;
+  max-height: 330px;
+  max-width: 950px;
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #122a91e1;
+  border: 31px none #122a91e1;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #122a91e1;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #122a91e1;
+}
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #f2f2f2;
+}
+::-webkit-scrollbar-track:active {
+  background: #f5f5f5;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .padding {
@@ -247,8 +284,9 @@ li:hover {
 #box-ingredients:hover {
   background: #3282f7;
   min-width: 50%;
-  margin-bottom: -29em;
+  margin-bottom: -1500px;
   z-index: 1;
+  transition: 0s;
 }
 
 #box-appareils {
@@ -260,6 +298,7 @@ li:hover {
   min-width: 40%;
   margin-bottom: -29em;
   z-index: 1;
+  transition: 0s;
 }
 
 #box-ustensiles {
@@ -271,6 +310,7 @@ li:hover {
   min-width: 50%;
   margin-bottom: -29em;
   z-index: 1;
+  transition: 0s;
 }
 
 #no-results {
