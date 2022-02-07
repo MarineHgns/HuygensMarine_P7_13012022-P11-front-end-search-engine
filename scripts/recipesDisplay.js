@@ -4,7 +4,7 @@ export default function recipeFactory(recipes, recipeCardTemplate) {
     const picture = `assets/plat.jpg`;
 
     recipeCardTemplate += `
-                                <div class="article ${id}" tabindex="1">
+                                <div class="article-recipes ${id}" tabindex="1">
                                     <img src="${picture}" alt="photo de la recette" class="plate">
                                         <div class="card">
                                             <div class="header-recipe">

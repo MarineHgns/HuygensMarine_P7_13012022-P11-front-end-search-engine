@@ -2,26 +2,31 @@ import { recipes } from "../recipes.js";
 import { elementsTag } from "./listDisplay.js";
 import recipeFactory from "../scripts/recipesDisplay.js";
 import createBoxTags from "./tagDisplay.js";
-import JumpSearchList from "../scripts/search.js";
-import search from "./search.js";
+import globalSearchInput from "./search.js";
+import binarySearch from "./binarySearch.js";
+import filterTagsbyInputTag from "./searchItem.js";
 
 // Recipes
 function displayRecipes() {
-  const recipiesContainer = document.getElementById("recipes");
-  recipiesContainer.innerHTML = "";
+  const recipesContainer = document.getElementById("recipes");
+  recipesContainer.innerHTML = "";
 
   let recipeCardTemplate = "";
   for (const recipe of recipes) {
     const recipeModel = new recipeFactory(recipe, recipeCardTemplate);
     recipeCardTemplate = recipeModel.createCardRecipe();
   }
-  recipiesContainer.innerHTML = recipeCardTemplate;
+  recipesContainer.innerHTML = recipeCardTemplate;
 }
 
 displayRecipes();
 
 // Tag
-
 createBoxTags();
 
-JumpSearchList();
+// Binary Search
+
+binarySearch();
+
+// filter tag with input search
+filterTagsbyInputTag();

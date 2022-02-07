@@ -15,10 +15,11 @@ export default function createBoxTags() {
       tagBox.classList.add("tag-ingredient");
       tagIng.appendChild(tagBox);
       removeTag();
+      console.log(listTagIngredients);
     });
   }
 
-  //  Appliances
+  //  appliances
   const listItemAppliances = document.querySelectorAll(
     ".search-item-appliance"
   );
@@ -37,7 +38,7 @@ export default function createBoxTags() {
     });
   }
 
-  // Ustensils
+  // ustensils
 
   const listItemUstensils = document.querySelectorAll(".search-item-ustensils");
 
@@ -56,18 +57,20 @@ export default function createBoxTags() {
   }
 }
 
+// Display Tag in his box
 function displayTag(value) {
   const wrapper = document.createElement("span");
   wrapper.classList.add("tag-box");
 
-  let TagCard = `
+  let tagCard = `
                   <span>${value}</span>
                   <i class="far fa-times-circle fa-lg close-tag"></i>
                 `;
-  wrapper.innerHTML = TagCard;
+  wrapper.innerHTML = tagCard;
   return wrapper;
 }
 
+// Remove tag when clicked on
 function removeTag() {
   const removeTag = document.querySelectorAll(".tag-box");
   if (removeTag.length) {

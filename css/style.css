@@ -124,16 +124,7 @@ input ::placeholder {
   position: relative;
 }
 
-#listUstensiles {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-#listAppareils {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
 #listIngredients {
-  grid-template-columns: 1fr 1fr 1fr;
   max-height: 330px;
   max-width: 950px;
   overflow: auto;
@@ -177,9 +168,17 @@ input ::placeholder {
   padding-bottom: 0.4em;
 }
 
+ul {
+  margin-block-end: 0em;
+  margin-block-start: 0em;
+  padding-inline-start: 0em;
+  grid-template-columns: 1fr 1fr 1fr;
+  list-style-type: none;
+  display: grid;
+}
+
 li {
   list-style: none;
-  grid-template-columns: 1fr 1fr 1fr;
   font-size: 1.2em;
   font-weight: 500;
   padding-top: 1em;
@@ -340,7 +339,7 @@ main {
   z-index: -99999;
 }
 
-.article {
+.article-recipes {
   min-width: 270px;
   max-width: 360px;
   height: 364px;

@@ -1,6 +1,6 @@
 import { recipes } from "../recipes.js";
 
-// get elements (ingredients, appliances, ustensils)
+// get elements [] (ingredients, appliances, ustensils)
 export function elementsTag(recipes, elementTag) {
   let list = [];
   let listreduced = [];
@@ -45,38 +45,40 @@ export function elementsTag(recipes, elementTag) {
   }
 }
 
-// // display element in the box
-function listTag(item, element) {
+//  display element in their box
+export function listTag(item, element) {
   const wrapper = document.createElement("li");
   wrapper.classList.add(`search-item-${element}`);
+  wrapper.classList.add(`search-item`);
   wrapper.innerText = item.charAt(0).toUpperCase() + item.slice(1);
   return wrapper;
 }
 
-// add element ingredient in his box
+export default function createListElements() {
+  // add element ingredient in his box
+  elementsTag(recipes, "ingredients").forEach((element) => {
+    document
+      .querySelector(".search-list-ingredients")
+      .append(listTag(element, "ingredients"));
+  });
 
-elementsTag(recipes, "ingredients").forEach((element) => {
-  document
-    .querySelector("#listIngredients")
-    .append(listTag(element, "ingredients"));
-});
+  // add element appliance in his box
+  elementsTag(recipes, "appliance").forEach((element) => {
+    document
+      .querySelector(".search-list-appareils")
+      .append(listTag(element, "appliance"));
+  });
 
-// add element appliance in his box
-elementsTag(recipes, "appliance").forEach((element) => {
-  document
-    .querySelector("#listAppareils")
-    .append(listTag(element, "appliance"));
-});
+  // add element ustensils in his box
 
-// add element ustensils in his box
-elementsTag(recipes, "ustensils").forEach((element) => {
-  document
-    .querySelector("#listUstensiles")
-    .append(listTag(element, "ustensils"));
-});
+  elementsTag(recipes, "ustensils").forEach((element) => {
+    document
+      .querySelector(".search-list-ustensils")
+      .append(listTag(element, "ustensils"));
+  });
+}
 
 // list + search display/remove on mouseover
-
 let i;
 function tagListDisplay() {
   document.querySelectorAll(".title")[i].style.display = "none";
@@ -135,21 +137,4 @@ document.querySelector("#box-ustensiles").addEventListener("mouseleave", () => {
   tagListRemove();
 });
 
-// export default function filterIngredient() {
-//   let searchInput = document.querySelector("#search-ingredients");
-//   searchInput.addEventListener("input", filterData);
-//   // console.log(ingredientsTags);
-//   function filterData(e) {
-//     // let ingList = document.querySelector("#recipes");
-//     // ingBox.innerHTML = "";
-
-//     const searchedString = e.target.value.toLowerCase();
-
-//     const filteredArr = ingredientsTags.filter((el) =>
-//       el.toLowerCase().includes(searchedString)
-//     );
-//     // console.log(filteredArr);
-//   }
-// }
-
-// filterIngredient();
+createListElements();
