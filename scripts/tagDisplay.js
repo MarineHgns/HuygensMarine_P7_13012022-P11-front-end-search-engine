@@ -1,39 +1,38 @@
-export default function createBoxTags() {
-  // ingredients
-  const listItemIngredients = document.querySelectorAll(
-    ".search-item-ingredients"
-  );
+import { recipes } from "../recipes.js";
+import recipeFactory from "./recipesDisplay.js";
+import searchByTags from "./searchTag.js";
+import removeMiniTag from "./searchTag.js";
 
-  let listTagIngredients = [];
-  let tagIng = document.querySelector("#listTagIngredient");
+let listMiniTags = [];
+export default function createBoxTags() {
+  const miniTags = document.querySelector("#tagList");
+  // ingredients
+  const listItemIngredients = document.querySelectorAll(".search-item-ingredients");
 
   for (let i = 0; i < listItemIngredients.length; i++) {
     listItemIngredients[i].addEventListener("click", () => {
-      listTagIngredients.push(listItemIngredients[i]);
-      tagIng.style.display = "block";
-      const tagBox = displayTag(listItemIngredients[i].innerHTML);
+      listMiniTags.push(listItemIngredients[i]);
+      miniTags.style.display = "block";
+      listItemIngredients[i].style.display = "none";
+      const tagBox = displayTag(listItemIngredients[i].innerText.toLowerCase(), "ingredients");
       tagBox.classList.add("tag-ingredient");
-      tagIng.appendChild(tagBox);
+      miniTags.appendChild(tagBox);
+      searchByTags("ingredients", listItemIngredients[i].innerText.toLowerCase());
       removeTag();
-      console.log(listTagIngredients);
     });
   }
 
   //  appliances
-  const listItemAppliances = document.querySelectorAll(
-    ".search-item-appliance"
-  );
-
-  let listTagAppliances = [];
-  let tagApp = document.querySelector("#listTagAppareil");
+  const listItemAppliances = document.querySelectorAll(".search-item-appliance");
 
   for (let i = 0; i < listItemAppliances.length; i++) {
     listItemAppliances[i].addEventListener("click", () => {
-      listTagAppliances.push(listItemAppliances[i]);
-      tagApp.style.display = "block";
-      const tagBox = displayTag(listItemAppliances[i].innerHTML);
+      listMiniTags.push(listItemAppliances[i]);
+      miniTags.style.display = "block";
+      const tagBox = displayTag(listItemAppliances[i].innerText.toLowerCase(), "appliance");
       tagBox.classList.add("tag-appliances");
-      tagApp.appendChild(tagBox);
+      miniTags.appendChild(tagBox);
+      searchByTags("appliance", listItemAppliances[i].innerText.toLowerCase());
       removeTag();
     });
   }
@@ -42,26 +41,25 @@ export default function createBoxTags() {
 
   const listItemUstensils = document.querySelectorAll(".search-item-ustensils");
 
-  let listTagUstensils = [];
-  let tagUst = document.querySelector("#listTagUstensile");
-
   for (let i = 0; i < listItemUstensils.length; i++) {
     listItemUstensils[i].addEventListener("click", () => {
-      listTagUstensils.push(listItemUstensils[i]);
-      tagUst.style.display = "block";
-      const tagBox = displayTag(listItemUstensils[i].innerHTML);
+      listMiniTags.push(listItemUstensils[i]);
+      miniTags.style.display = "block";
+      const tagBox = displayTag(listItemUstensils[i].innerText.toLowerCase(), "ustensils");
       tagBox.classList.add("tag-ustensils");
-      tagUst.appendChild(tagBox);
+      miniTags.appendChild(tagBox);
+      searchByTags("ustensils", listItemUstensils[i].innerText.toLowerCase());
       removeTag();
     });
   }
 }
 
 // Display Tag in his box
-function displayTag(value) {
-  const wrapper = document.createElement("span");
+function displayTag(value, type) {
+  const wrapper = document.createElement("button");
   wrapper.classList.add("tag-box");
-
+  wrapper.setAttribute("type", "button");
+  wrapper.setAttribute("datavalue", `${type}`);
   let tagCard = `
                   <span>${value}</span>
                   <i class="far fa-times-circle fa-lg close-tag"></i>
@@ -70,13 +68,25 @@ function displayTag(value) {
   return wrapper;
 }
 
-// Remove tag when clicked on
+// // Remove tag when clicked on
 function removeTag() {
   const removeTag = document.querySelectorAll(".tag-box");
   if (removeTag.length) {
     for (let x = 0; x < removeTag.length; x++)
       removeTag[x].addEventListener("click", () => {
         removeTag[x].remove();
+        searchByTags();
+        removeMiniTag();
+        let removeTagList = document.querySelectorAll(".tag-box");
+        if (removeTagList.length === 0) {
+          let recipesContainer = document.getElementById("recipes");
+          let recipeCardTemplate = "";
+          recipes.forEach((recipe) => {
+            let recipeModel = new recipeFactory(recipe, recipeCardTemplate);
+            recipeCardTemplate = recipeModel.createCardRecipe();
+          });
+          recipesContainer.innerHTML = recipeCardTemplate;
+        }
       });
   }
 }

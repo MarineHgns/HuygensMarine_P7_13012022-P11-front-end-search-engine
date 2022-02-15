@@ -7,7 +7,6 @@ export default function filterTagsbyInputTag() {
     .addEventListener("input", (e) => {
       for (let ing of listIngredients) {
         let item = ing.innerHTML.toLowerCase();
-        console.log(item);
         if (item.indexOf(e.target.value.toLowerCase()) == -1) {
           ing.style.display = "none";
         } else {

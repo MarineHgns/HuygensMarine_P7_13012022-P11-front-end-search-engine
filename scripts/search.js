@@ -1,12 +1,12 @@
 import { recipes } from "../recipes.js";
 import { listTag } from "./listDisplay.js";
 import recipeFactory from "./recipesDisplay.js";
+import searchByTags from "./searchTag.js";
 import createBoxTags from "./tagDisplay.js";
 
 export default function globalSearch() {
   document.getElementById("search").addEventListener("input", (e) => {
-    const inputSearch = document.getElementById("search");
-    let searchInLowerCase = inputSearch.value.toLowerCase();
+    let searchInLowerCase = document.getElementById("search").value.toLowerCase();
     // all recipes card  if input value <= 2
     if (e.target.value.length <= 2) {
       const recipesCard = document.querySelectorAll(".article-recipes");
@@ -29,18 +29,15 @@ export default function globalSearch() {
         return (
           obj.name.toLowerCase().includes(searchInLowerCase) ||
           obj.description.toLowerCase().includes(searchInLowerCase) ||
-          obj.ingredients.find((ingredient) =>
-            ingredient.ingredient.toLowerCase().includes(searchInLowerCase)
-          ) ||
-          obj.ustensils.find((ustensils) =>
-            ustensils.toLowerCase().includes(searchInLowerCase)
-          ) ||
+          obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(searchInLowerCase)) ||
+          obj.ustensils.find((ustensils) => ustensils.toLowerCase().includes(searchInLowerCase)) ||
           obj.appliance.toLowerCase().includes(searchInLowerCase)
         );
       });
       resultCardRecipes(results);
       createBoxTags();
       tagFromSearch(results);
+      searchByTags();
     }
   });
   // remove all cards
@@ -49,17 +46,17 @@ export default function globalSearch() {
   });
   function resultCardRecipes(results) {
     // display none/block if results or not
-    const MsgNoResult = document.querySelector("#no-results");
+    let MsgNoResult = document.querySelector("#no-results");
     if (results.length === 0) {
       MsgNoResult.style.display = "block";
     } else {
       MsgNoResult.style.display = "none";
     }
     // create new cards with the result
-    const recipesContainer = document.getElementById("recipes");
+    let recipesContainer = document.getElementById("recipes");
     let recipeCardTemplate = "";
     results.forEach((recipe) => {
-      const recipeModel = new recipeFactory(recipe, recipeCardTemplate);
+      let recipeModel = new recipeFactory(recipe, recipeCardTemplate);
       recipeCardTemplate = recipeModel.createCardRecipe();
     });
     recipesContainer.innerHTML = recipeCardTemplate;
@@ -76,18 +73,14 @@ function tagFromSearch(results) {
   let reducedIngredient = [];
   results.forEach((recipe) => {
     if (recipe.ingredients.length) {
-      const ingredientsMapResult = recipe.ingredients.map((ingr) =>
-        ingr.ingredient.toLowerCase()
-      );
+      const ingredientsMapResult = recipe.ingredients.map((ingr) => ingr.ingredient.toLowerCase());
       ingredientsResult.push(...ingredientsMapResult);
       reducedIngredient = [...new Set(ingredientsResult)]; //remove duplicates
     }
   });
   //   add new list ingredients
   reducedIngredient.forEach((element) => {
-    document
-      .querySelector(".search-list-ingredients")
-      .append(listTag(element, "ingredients"));
+    document.querySelector(".search-list-ingredients").append(listTag(element, "ingredients"));
   });
   // appliances [] from results
   let appliancesResult = [];
@@ -101,9 +94,7 @@ function tagFromSearch(results) {
   });
   // add new list appliance
   reducedAppliance.forEach((element) => {
-    document
-      .querySelector(".search-list-appareils")
-      .append(listTag(element, "appliance"));
+    document.querySelector(".search-list-appareils").append(listTag(element, "appliance"));
   });
   // ustensils [] from results
   let ustensilsResult = [];
@@ -118,10 +109,10 @@ function tagFromSearch(results) {
   });
   // add new list ustensils
   reducedUstensils.forEach((element) => {
-    document
-      .querySelector(".search-list-ustensils")
-      .append(listTag(element, "ustensils"));
+    document.querySelector(".search-list-ustensils").append(listTag(element, "ustensils"));
   });
+  createBoxTags();
+  searchByTags();
 }
 
 const inputSearch = document.getElementById("search");

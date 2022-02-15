@@ -2,7 +2,6 @@ import { recipes } from "../recipes.js";
 import { elementsTag } from "./listDisplay.js";
 import recipeFactory from "../scripts/recipesDisplay.js";
 import createBoxTags from "./tagDisplay.js";
-import globalSearchInput from "./search.js";
 import binarySearch from "./binarySearch.js";
 import filterTagsbyInputTag from "./searchItem.js";
 
@@ -21,11 +20,7 @@ function displayRecipes() {
 
 displayRecipes();
 
-// Tag
-createBoxTags();
-
 // Binary Search
-
 binarySearch();
 
 // filter tag with input search

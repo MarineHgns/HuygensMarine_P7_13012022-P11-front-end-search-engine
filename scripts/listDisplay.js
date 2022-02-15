@@ -80,61 +80,34 @@ export default function createListElements() {
 
 // list + search display/remove on mouseover
 let i;
-function tagListDisplay() {
-  document.querySelectorAll(".title")[i].style.display = "none";
-  document.querySelectorAll(".list")[i].style.display = "grid";
-  document.querySelectorAll(".search")[i].style.display = "block";
-  document.querySelectorAll(".fa-chevron-down")[i].style.transform =
-    "rotate(180deg)";
-}
-
-function tagListRemove() {
-  document.querySelectorAll(".hide")[i].style.display = "none";
-  document.querySelectorAll(".list")[i].style.display = "none";
-  document.querySelectorAll(".title")[i].style.display = "block";
-  document.querySelectorAll(".fa-chevron-down")[i].style.transform =
-    "rotate(0deg)";
-}
-
-// ingredients
-// display
-document.querySelector("#box-ingredients").addEventListener("mouseover", () => {
-  i = 0;
-  tagListDisplay();
-});
-
-// remove
-document
-  .querySelector("#box-ingredients")
-  .addEventListener("mouseleave", () => {
-    i = 0;
-    tagListRemove();
+function tagListDisplay(selecteur, index) {
+  document.querySelector(selecteur).addEventListener("mouseover", () => {
+    i = index;
+    document.querySelectorAll(".title")[i].style.display = "none";
+    document.querySelectorAll(".list")[i].style.display = "grid";
+    document.querySelectorAll(".search")[i].style.display = "block";
+    document.querySelectorAll(".fa-chevron-down")[i].style.transform =
+      "rotate(180deg)";
   });
+}
 
-// appliances
-// display
-document.querySelector("#box-appareils").addEventListener("mouseover", () => {
-  i = 1;
-  tagListDisplay();
-});
+tagListDisplay("#box-ingredients", 0);
+tagListDisplay("#box-appareils", 1);
+tagListDisplay("#box-ustensiles", 2);
 
-// remove
-document.querySelector("#box-appareils").addEventListener("mouseleave", () => {
-  i = 1;
-  tagListRemove();
-});
+function tagListRemove(selecteur, index) {
+  document.querySelector(selecteur).addEventListener("mouseleave", () => {
+    i = index;
+    document.querySelectorAll(".hide")[i].style.display = "none";
+    document.querySelectorAll(".list")[i].style.display = "none";
+    document.querySelectorAll(".title")[i].style.display = "block";
+    document.querySelectorAll(".fa-chevron-down")[i].style.transform =
+      "rotate(0deg)";
+  });
+}
 
-// ustensils
-// display
-document.querySelector("#box-ustensiles").addEventListener("mouseover", () => {
-  i = 2;
-  tagListDisplay();
-});
-
-// remove
-document.querySelector("#box-ustensiles").addEventListener("mouseleave", () => {
-  i = 2;
-  tagListRemove();
-});
+tagListRemove("#box-ingredients", 0);
+tagListRemove("#box-appareils", 1);
+tagListRemove("#box-ustensiles", 2);
 
 createListElements();
