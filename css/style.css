@@ -168,7 +168,7 @@ input ::placeholder {
   padding-bottom: 0.4em;
 }
 
-ul {
+nav ul {
   margin-block-end: 0em;
   margin-block-start: 0em;
   padding-inline-start: 0em;
@@ -177,7 +177,7 @@ ul {
   display: grid;
 }
 
-li {
+nav li {
   list-style: none;
   font-size: 1.2em;
   font-weight: 500;
@@ -185,7 +185,7 @@ li {
   padding-left: 0.8em;
 }
 
-li:hover {
+nav li:hover {
   transform: scale(1.1);
   color: rgba(255, 255, 255, 0.74);
   padding-left: 1.4em;
@@ -246,20 +246,6 @@ li:hover {
   margin-right: 0.5em;
   cursor: pointer;
   transition: all 0.4s;
-}
-
-.fa-chevron-down:hover {
-  animation: chevronRotate 2s backwards;
-  transform: rotate(180deg);
-}
-
-@keyframes chevronRotate {
-  from {
-    transform: rotate(180deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
 }
 
 .hide {
@@ -340,7 +326,6 @@ main {
   justify-content: space-between;
   flex-wrap: wrap;
   transition: all 0.5s;
-  position: fixed;
   z-index: -99999;
 }
 
@@ -358,13 +343,13 @@ main {
   display: inline-block;
   cursor: pointer;
   transition: all 0.5s;
-  margin-right: 2em;
 }
 
 .card {
   max-width: 360px;
   padding-left: 1.4em;
   padding-right: 1.4em;
+  cursor: default;
 }
 
 .plate {
@@ -380,11 +365,13 @@ main {
   display: flex;
   justify-content: space-between;
   font-size: 1em;
+  align-items: baseline;
 }
 
 .name-recipe {
   font-size: 1.2em;
   max-width: 75%;
+  margin-bottom: 1.1em;
 }
 
 .time {
@@ -413,6 +400,7 @@ main {
   display: flex;
   justify-content: space-between;
   font-size: 0.85em;
+  margin-top: -1.1em;
 }
 
 .recipe-ingredients {
@@ -421,6 +409,17 @@ main {
   overflow: hidden;
   max-width: 165px;
   max-height: 120px;
+  font-size: 1em;
+}
+
+main ul {
+  padding-left: 0em;
+}
+main li {
+  list-style: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 426px) {

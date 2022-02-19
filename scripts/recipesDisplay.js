@@ -1,42 +1,37 @@
-export default function recipeFactory(recipes, recipeCardTemplate) {
-  function createCardRecipe() {
-    const { id, name, ingredients, description, time } = recipes;
+export default class RecipeDisplay {
+  static createCardRecipe(result) {
+    let recipesContainer = document.getElementById("recipes");
+    recipesContainer.innerHTML = "";
     const picture = `assets/plat.jpg`;
-
-    recipeCardTemplate += `
-                                <div class="article-recipes ${id}" tabindex="1">
-                                    <img src="${picture}" alt="photo de la recette" class="plate">
+    result.forEach((recipe) => {
+      let recipeCardTemplate = "";
+      recipeCardTemplate += `<div class="article-recipes" id=${recipe.id} tabindex="1">
+                                      <img src="${picture}" alt="photo de la recette" class="plate">
                                         <div class="card">
-                                            <div class="header-recipe">
-                                                <h2 class="name-recipe" title="${name}" tabindex="1">${name}</h2>
-                                                <p class="time" tabindex="1"><i class="far fa-clock"></i> ${time} min</p> 
-                                            </div>
-                                        <div class="body-recipe">
-                                            <div class="recipe-ingredients tabindex="1"">
-    
-                            `;
+                                          <div class="header-recipe">
+                                            <h5 class="name-recipe" title="${recipe.name}" tabindex="1">${recipe.name}</h5>
+                                              <div>
+                                                <p class="time" tabindex="1"><i class="far fa-clock"></i>${recipe.time} min</p>   
+                                              </div>
+                                          </div>
+                                                <div class="body-recipe">
+                                                  <ul class="recipe-ingredients"> `;
 
-    for (const ingredient of ingredients) {
-      recipeCardTemplate += `<span class="bold" tabindex="1"> ${ingredient.ingredient}</span>`;
-      if (ingredient.quantity) {
-        recipeCardTemplate += `<span class="bold" tabindex="1">: ${ingredient.quantity}</span> `;
-      }
-      if (ingredient.unit) {
-        recipeCardTemplate += ` ${ingredient.unit}`;
-      }
-      recipeCardTemplate += `<br>`;
-    }
+      recipe.ingredients.forEach((element) => {
+        let unit = "";
+        if (element.unit !== undefined) {
+          unit = element.unit;
+        }
 
-    recipeCardTemplate += `
-                                                </div>
-                                            <div class="description" tabindex="1">${description}</div>
-                                        </div>
-                                        </div>
-                                    </div>
+        recipeCardTemplate += `<li><strong>${element.ingredient}:</strong> ${element.quantity} ${unit}</li>`;
+      });
+
+      recipeCardTemplate += ` </ul>
+                                <p class="card-text description">${recipe.description}</p>
                                 </div>
-                              `;
-
-    return recipeCardTemplate;
+                              </div>
+                            </div>`;
+      recipesContainer.insertAdjacentHTML("beforeend", recipeCardTemplate);
+    });
   }
-  return { createCardRecipe };
 }

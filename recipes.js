@@ -1,3 +1,5 @@
+import RecipesClean from "./scripts/CleanData/formattingBuilder.js";
+
 export const recipes = [
   {
     id: 1,
@@ -25,6 +27,7 @@ export const recipes = [
       },
       {
         ingredient: "Glaçons",
+        quantity: 20,
       },
     ],
     time: 10,
@@ -1370,8 +1373,7 @@ export const recipes = [
       },
     ],
     time: 20,
-    description:
-      "Fouettez les oeufs, le sucre et le lait. tremper les tranches de pain. Le cuire au four pendant environ 10 minutes à 180°. Servir",
+    description: "Fouettez les oeufs, le sucre et le lait. tremper les tranches de pain. Le cuire au four pendant environ 10 minutes à 180°. Servir",
     appliance: "Four",
     ustensils: ["fouet", "bol", "Cuillère à Soupe"],
   },
@@ -1733,8 +1735,7 @@ export const recipes = [
       },
     ],
     time: 0,
-    description:
-      "Découper les fruits. Le passer au blender jusqu'à obtenir une texture liquide. Mettre au frais. Servir",
+    description: "Découper les fruits. Le passer au blender jusqu'à obtenir une texture liquide. Mettre au frais. Servir",
     appliance: "Blender",
     ustensils: ["couteau", "verres"],
   },
@@ -1770,8 +1771,71 @@ export const recipes = [
     ],
     time: 60,
     description:
-      "Préparer la frangipane : Mélanger le sucre la poudre d'amander, le beurre et les oeufs. Etaler la moitier de la pate feuilleté et mettre dans un moule à tarte. Garnir de frangipane et recouvrir du reste de pate feuilletée. Mettre au four 30 minutes",
+      "Préparer la frangipane : Mélanger le sucre la poudre d'amande, le beurre et les oeufs. Etaler la moitier de la pate feuilleté et mettre dans un moule à tarte. Garnir de frangipane et recouvrir du reste de pate feuilletée. Mettre au four 30 minutes",
     appliance: "Four",
     ustensils: ["rouleau à patisserie", "fouet"],
   },
 ];
+
+/////// SEARCH ALGO
+
+const inputValueTest = "jus de citron ";
+
+let results = recipes.filter((obj) => {
+  return (
+    obj.name.toLowerCase().includes(inputValueTest) ||
+    obj.description.toLowerCase().includes(inputValueTest) ||
+    obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(inputValueTest))
+  );
+});
+
+//// SEARCH WITH CLEANED DATA
+
+let recipesCleaned = RecipesClean.clean(recipes);
+
+results = recipesCleaned.filter((obj) => {
+  return (
+    obj.name.toLowerCase().includes(inputValueTest) ||
+    obj.description.toLowerCase().includes(inputValueTest) ||
+    obj.ingredientsString.toLowerCase().includes(inputValueTest)
+  );
+});
+//////////////////
+let tabName = [];
+let tabNameFinal = [];
+let tabNameResult = [];
+recipesCleaned.forEach((el) => {
+  tabName = el.name;
+  tabNameResult.push(tabName);
+  tabNameFinal = [...new Set(tabNameResult)];
+});
+
+// console.log(tabNameFinal.sort());
+
+//// BINARY SEARCH
+
+function binarySearch(arr, x) {
+  x = "houmous express".toUpperCase();
+  arr = tabNameFinal;
+  var startIndex = 0,
+    stopIndex = arr.length - 1,
+    middle = Math.floor((stopIndex + startIndex) / 2);
+  while (arr[middle] != x && startIndex < stopIndex) {
+    if (x < arr[middle]) {
+      stopIndex = middle - 1;
+    } else if (x > arr[middle]) {
+      startIndex = middle + 1;
+    }
+
+    middle = Math.floor((stopIndex + startIndex) / 2);
+  }
+
+  return arr[middle] != x ? -1 : middle;
+}
+
+let result = binarySearch();
+if (result == -1) console.log("Element non trouvé");
+else console.log("Element trouvé à l'" + "index " + result);
+
+// binarySearch();
+////////////

@@ -1,8 +1,9 @@
 import { recipes } from "../recipes.js";
 import { listTag } from "./listDisplay.js";
-import recipeFactory from "./recipesDisplay.js";
-import searchByTags from "./searchTag.js";
 import createBoxTags from "./tagDisplay.js";
+import RecipeDisplay from "./recipesDisplay.js";
+import filterTagsbyInputTag from "./searchItem.js";
+import RecipesClean from "./CleanData/formattingBuilder.js";
 
 export default function globalSearch() {
   document.getElementById("search").addEventListener("input", (e) => {
@@ -17,6 +18,7 @@ export default function globalSearch() {
       }
       // Display recipes
       resultCardRecipes(recipes);
+      filterTagsbyInputTag();
     }
     // if input value >= 3
     if (e.target.value.length >= 3) {
@@ -24,20 +26,48 @@ export default function globalSearch() {
       document.querySelectorAll(".search-item").forEach((item) => {
         item.remove();
       });
+
+      /////////// ALGO SEARCH 1 ///////////////////////////
+      ////////////////////////////////////////////////////
       // search (filter + includes) input value -> recipes (name, description, ingredients, ustensils, appliance)
-      let results = recipes.filter((obj) => {
+      // let results = recipes.filter((obj) => {
+      //   return (
+      //     obj.name.toLowerCase().includes(searchInLowerCase) ||
+      //     obj.description.toLowerCase().includes(searchInLowerCase) ||
+      //     obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(searchInLowerCase)) ||
+      //     obj.ustensils.find((ustensils) => ustensils.toLowerCase().includes(searchInLowerCase)) ||
+      //     obj.appliance.toLowerCase().includes(searchInLowerCase)
+      //   );
+      // });
+
+      /////////////////////////////////////////////////////////
+      // ALGO 2 SEARCH VIA CLEANDATA /////////////////////////
+      let recipesCleaned = RecipesClean.clean(recipes);
+
+      let results = recipesCleaned.filter((obj) => {
         return (
           obj.name.toLowerCase().includes(searchInLowerCase) ||
           obj.description.toLowerCase().includes(searchInLowerCase) ||
-          obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(searchInLowerCase)) ||
-          obj.ustensils.find((ustensils) => ustensils.toLowerCase().includes(searchInLowerCase)) ||
-          obj.appliance.toLowerCase().includes(searchInLowerCase)
+          obj.ingredientsString.toLowerCase().includes(searchInLowerCase)
         );
       });
+
+      let finalResult = [];
+      results.forEach((res) => {
+        let id = res.id;
+        res = !id ? recipes : recipes.filter((el) => el.id == id);
+        finalResult.push(...res);
+        return finalResult;
+      });
+
+      results = finalResult;
+
+      ///////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////
       resultCardRecipes(results);
-      createBoxTags();
+      new createBoxTags();
       tagFromSearch(results);
-      searchByTags();
+      filterTagsbyInputTag();
     }
   });
   // remove all cards
@@ -52,14 +82,7 @@ export default function globalSearch() {
     } else {
       MsgNoResult.style.display = "none";
     }
-    // create new cards with the result
-    let recipesContainer = document.getElementById("recipes");
-    let recipeCardTemplate = "";
-    results.forEach((recipe) => {
-      let recipeModel = new recipeFactory(recipe, recipeCardTemplate);
-      recipeCardTemplate = recipeModel.createCardRecipe();
-    });
-    recipesContainer.innerHTML = recipeCardTemplate;
+    RecipeDisplay.createCardRecipe(results);
   }
 }
 // update tag from search (ingredients-appliances-ustensils)
@@ -111,8 +134,7 @@ function tagFromSearch(results) {
   reducedUstensils.forEach((element) => {
     document.querySelector(".search-list-ustensils").append(listTag(element, "ustensils"));
   });
-  createBoxTags();
-  searchByTags();
+  new createBoxTags();
 }
 
 const inputSearch = document.getElementById("search");
