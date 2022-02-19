@@ -3,7 +3,7 @@
 
 # Projet 7 - Les petits plats
 
-<!-- ## Project :
+## Project :
 
 https://marinehgns.github.io/HuygensMarine_P7_13012022-P11-front-end-search-engine/
 
@@ -33,4 +33,3 @@ Après avoir édité des livres de cuisine pendant plusieurs années, l’entrep
 
 - Pour choisir le meilleur algorithme, il faut que tu testes leur performance. Pour ça, tu peux utiliser l’outil de comparaison de performance que tu veux, personnellement j’utilise Jsben.ch pour ce genre d’analyse. Il te donnera le nombre d’opérations par seconde réalisées par chaque script et te permet donc de voir en un clin d’œil quel script est le plus performant.
 
-#### Ça y est, vous avez toutes les informations nécessaires pour démarrer votre travail.
