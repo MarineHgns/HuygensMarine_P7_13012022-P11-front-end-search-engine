@@ -75,6 +75,9 @@ export default class tagDisplay {
             removeTag[x].classList.remove("selected");
             removeTag[x].remove();
             UpdateAfterRemoveTag();
+            if (document.querySelectorAll(".tag-box").length == 0) {
+              tagDisplay.createBoxTags();
+            }
           });
       }
     }

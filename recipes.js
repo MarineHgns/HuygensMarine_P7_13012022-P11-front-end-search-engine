@@ -1810,12 +1810,13 @@ recipesCleaned.forEach((el) => {
   tabNameFinal = [...new Set(tabNameResult)];
 });
 
-// console.log(tabNameFinal.sort());
+console.log(tabNameFinal.sort());
+console.log(tabNameFinal);
 
 //// BINARY SEARCH
 
 function binarySearch(arr, x) {
-  x = "houmous express".toUpperCase();
+  x = "brownie".toUpperCase();
   arr = tabNameFinal;
   var startIndex = 0,
     stopIndex = arr.length - 1,
@@ -1837,5 +1838,4 @@ let result = binarySearch();
 if (result == -1) console.log("Element non trouvé");
 else console.log("Element trouvé à l'" + "index " + result);
 
-// binarySearch();
 ////////////

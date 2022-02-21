@@ -327,6 +327,7 @@ main {
   flex-wrap: wrap;
   transition: all 0.5s;
   z-index: -99999;
+  margin-right: 1em;
 }
 
 .article-recipes {

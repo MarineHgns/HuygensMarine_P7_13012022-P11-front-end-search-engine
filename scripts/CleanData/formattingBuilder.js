@@ -1,7 +1,6 @@
 import { recipes } from "../../recipes.js";
 import { formattingData } from "./formattingData.js";
 import { wordRemoved } from "./wordRemoved.js";
-
 export { RecipesClean };
 export default class RecipesClean {
   static clean() {
