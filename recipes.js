@@ -1,5 +1,3 @@
-import RecipesClean from "./scripts/CleanData/formattingBuilder.js";
-
 export const recipes = [
   {
     id: 1,
@@ -1776,66 +1774,3 @@ export const recipes = [
     ustensils: ["rouleau à patisserie", "fouet"],
   },
 ];
-
-/////// SEARCH ALGO
-
-const inputValueTest = "jus de citron ";
-
-let results = recipes.filter((obj) => {
-  return (
-    obj.name.toLowerCase().includes(inputValueTest) ||
-    obj.description.toLowerCase().includes(inputValueTest) ||
-    obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(inputValueTest))
-  );
-});
-
-//// SEARCH WITH CLEANED DATA
-
-let recipesCleaned = RecipesClean.clean(recipes);
-
-results = recipesCleaned.filter((obj) => {
-  return (
-    obj.name.toLowerCase().includes(inputValueTest) ||
-    obj.description.toLowerCase().includes(inputValueTest) ||
-    obj.ingredientsString.toLowerCase().includes(inputValueTest)
-  );
-});
-//////////////////
-let tabName = [];
-let tabNameFinal = [];
-let tabNameResult = [];
-recipesCleaned.forEach((el) => {
-  tabName = el.name;
-  tabNameResult.push(tabName);
-  tabNameFinal = [...new Set(tabNameResult)];
-});
-
-console.log(tabNameFinal.sort());
-console.log(tabNameFinal);
-
-//// BINARY SEARCH
-
-function binarySearch(arr, x) {
-  x = "brownie".toUpperCase();
-  arr = tabNameFinal;
-  var startIndex = 0,
-    stopIndex = arr.length - 1,
-    middle = Math.floor((stopIndex + startIndex) / 2);
-  while (arr[middle] != x && startIndex < stopIndex) {
-    if (x < arr[middle]) {
-      stopIndex = middle - 1;
-    } else if (x > arr[middle]) {
-      startIndex = middle + 1;
-    }
-
-    middle = Math.floor((stopIndex + startIndex) / 2);
-  }
-
-  return arr[middle] != x ? -1 : middle;
-}
-
-let result = binarySearch();
-if (result == -1) console.log("Element non trouvé");
-else console.log("Element trouvé à l'" + "index " + result);
-
-////////////
