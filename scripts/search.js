@@ -3,6 +3,7 @@ import { listTag } from "./listDisplay.js";
 import RecipeDisplay from "./recipesDisplay.js";
 import filterTagsbyInputTag from "./searchItem.js";
 import tagDisplay from "./tagDisplay.js";
+import { RecipesClean } from "../scripts/CleanData/formattingBuilder.js";
 
 export default function globalSearch() {
   document.getElementById("search").addEventListener("input", (e) => {
@@ -26,16 +27,27 @@ export default function globalSearch() {
         item.remove();
       });
 
+      // search on cleaned recipes
+      let recipesCleaned = RecipesClean.clean(recipes);
       // search (filter + includes) input value -> recipes (name, description, ingredients, ustensils, appliance)
-      let results = recipes.filter((obj) => {
+
+      let results = recipesCleaned.filter((obj) => {
         return (
           obj.name.toLowerCase().includes(searchInLowerCase) ||
           obj.description.toLowerCase().includes(searchInLowerCase) ||
-          obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(searchInLowerCase)) ||
-          obj.ustensils.find((ustensils) => ustensils.toLowerCase().includes(searchInLowerCase)) ||
-          obj.appliance.toLowerCase().includes(searchInLowerCase)
+          obj.ingredientsString.toLowerCase().includes(searchInLowerCase)
         );
       });
+
+      let finalResult = [];
+      results.forEach((res) => {
+        let id = res.id;
+        res = !id ? recipes : recipes.filter((el) => el.id == id);
+        finalResult.push(...res);
+        return finalResult;
+      });
+
+      results = finalResult;
 
       resultCardRecipes(results);
       tagDisplay.createBoxTags();

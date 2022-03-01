@@ -40,8 +40,6 @@ export default function SearchTag(dataValue, value) {
   totalMiniTags = uniqueList(totalMiniTags, "datavalue");
   lastResultTotalMiniTags.push(...totalMiniTags);
   let valueLowCase = value;
-  // const inputResearch = document.getElementById("search");
-  // let researchToLowerCase = inputResearch.value.toLowerCase();
 
   if (totalSelected.length > 0) {
     switch (dataValue) {
@@ -89,7 +87,6 @@ function UpdateItemsFromMiniTags() {
   let ingredientsResult = [];
   let reducedIngredient = [];
   resultRecipesMiniTags.forEach((recipe) => {
-    console.log(resultRecipesMiniTags);
     if (recipe.ingredients.length) {
       const ingredientsMapResult = recipe.ingredients.map((ingr) => ingr.ingredient.toLowerCase());
       ingredientsResult.push(...ingredientsMapResult);
