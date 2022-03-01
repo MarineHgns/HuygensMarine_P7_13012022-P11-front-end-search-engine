@@ -3,11 +3,11 @@ import { listTag } from "./listDisplay.js";
 import RecipeDisplay from "./recipesDisplay.js";
 import filterTagsbyInputTag from "./searchItem.js";
 import tagDisplay from "./tagDisplay.js";
-import { RecipesClean } from "../scripts/CleanData/formattingBuilder.js";
+import { newTabFinal } from "./binarySearch.js";
 
 export default function globalSearch() {
   document.getElementById("search").addEventListener("input", (e) => {
-    let searchInLowerCase = document.getElementById("search").value.toLowerCase();
+    let search = document.getElementById("search").value.toUpperCase();
     // all recipes card  if input value <= 2
     if (e.target.value.length <= 2) {
       const recipesCard = document.querySelectorAll(".article-recipes");
@@ -27,19 +27,60 @@ export default function globalSearch() {
         item.remove();
       });
 
-      // search on cleaned recipes
-      let recipesCleaned = RecipesClean.clean(recipes);
-      // search (filter + includes) input value -> recipes (name, description, ingredients, ustensils, appliance)
+      let resultIndex = [];
+      let x = search;
+      var startIndex = 0,
+        stopIndex = newTabFinal.length - 1,
+        middle = Math.floor((stopIndex + startIndex) / 2);
 
-      let results = recipesCleaned.filter((obj) => {
-        return (
-          obj.name.toLowerCase().includes(searchInLowerCase) ||
-          obj.description.toLowerCase().includes(searchInLowerCase) ||
-          obj.ingredientsString.toLowerCase().includes(searchInLowerCase)
-        );
-      });
+      while (newTabFinal[middle].word.indexOf(x) !== 0 && startIndex < stopIndex) {
+        resultIndex = [];
+        if (x < newTabFinal[middle].word) {
+          stopIndex = middle - 1;
+        } else if (x > newTabFinal[middle].word) {
+          startIndex = middle + 1;
+        } else if (stopIndex >= startIndex) {
+        }
+
+        middle = Math.floor((stopIndex + startIndex) / 2);
+        resultIndex = newTabFinal[middle].word.indexOf(x) !== 0 ? -1 : middle;
+      }
 
       let finalResult = [];
+      let results = [];
+
+      if (resultIndex >= 0) {
+        let resultIndexWordAfter = newTabFinal[resultIndex + 1].word;
+        let resultIndexWordPrevious = newTabFinal[resultIndex - 1].word;
+        let tabResult = [];
+        let tabTab = [];
+
+        if (resultIndex >= 0 && resultIndexWordAfter.includes(x)) {
+          tabResult.push([resultIndex + 1]);
+          if (resultIndex >= 0 && resultIndexWordPrevious.includes(x)) {
+            tabResult.push([resultIndex - 1]);
+          }
+        }
+
+        tabResult.push([newTabFinal[middle].word.indexOf(x) !== 0 ? -1 : middle]);
+
+        tabResult.map((e) => {
+          tabTab = newTabFinal[e].id;
+          tabTab.forEach((res) => {
+            res = !res ? recipes : recipes.filter((el) => el.id == res);
+            finalResult.push(...res);
+            finalResult = [...new Set(finalResult)];
+            return finalResult;
+          });
+        });
+
+        results = finalResult;
+      } else if (resultIndex <= -1) {
+        results = finalResult;
+        console.log("no results");
+      }
+
+      finalResult = [];
       results.forEach((res) => {
         let id = res.id;
         res = !id ? recipes : recipes.filter((el) => el.id == id);
@@ -55,6 +96,7 @@ export default function globalSearch() {
       filterTagsbyInputTag();
     }
   });
+
   // remove all cards
   document.querySelectorAll(".article-recipes").forEach((item) => {
     item.remove();
