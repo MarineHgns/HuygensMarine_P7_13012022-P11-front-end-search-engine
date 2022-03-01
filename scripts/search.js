@@ -3,7 +3,6 @@ import { listTag } from "./listDisplay.js";
 import createBoxTags from "./tagDisplay.js";
 import RecipeDisplay from "./recipesDisplay.js";
 import filterTagsbyInputTag from "./searchItem.js";
-import RecipesClean from "./CleanData/formattingBuilder.js";
 
 export default function globalSearch() {
   document.getElementById("search").addEventListener("input", (e) => {
@@ -27,43 +26,17 @@ export default function globalSearch() {
         item.remove();
       });
 
-      /////////// ALGO SEARCH 1 ///////////////////////////
-      ////////////////////////////////////////////////////
       // search (filter + includes) input value -> recipes (name, description, ingredients, ustensils, appliance)
-      // let results = recipes.filter((obj) => {
-      //   return (
-      //     obj.name.toLowerCase().includes(searchInLowerCase) ||
-      //     obj.description.toLowerCase().includes(searchInLowerCase) ||
-      //     obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(searchInLowerCase)) ||
-      //     obj.ustensils.find((ustensils) => ustensils.toLowerCase().includes(searchInLowerCase)) ||
-      //     obj.appliance.toLowerCase().includes(searchInLowerCase)
-      //   );
-      // });
-
-      /////////////////////////////////////////////////////////
-      // ALGO 2 SEARCH VIA CLEANDATA /////////////////////////
-      let recipesCleaned = RecipesClean.clean(recipes);
-
-      let results = recipesCleaned.filter((obj) => {
+      let results = recipes.filter((obj) => {
         return (
           obj.name.toLowerCase().includes(searchInLowerCase) ||
           obj.description.toLowerCase().includes(searchInLowerCase) ||
-          obj.ingredientsString.toLowerCase().includes(searchInLowerCase)
+          obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(searchInLowerCase)) ||
+          obj.ustensils.find((ustensils) => ustensils.toLowerCase().includes(searchInLowerCase)) ||
+          obj.appliance.toLowerCase().includes(searchInLowerCase)
         );
       });
 
-      let finalResult = [];
-      results.forEach((res) => {
-        let id = res.id;
-        res = !id ? recipes : recipes.filter((el) => el.id == id);
-        finalResult.push(...res);
-        return finalResult;
-      });
-
-      results = finalResult;
-
-      ///////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////
       resultCardRecipes(results);
       new createBoxTags();
       tagFromSearch(results);
