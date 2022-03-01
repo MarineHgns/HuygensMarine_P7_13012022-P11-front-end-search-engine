@@ -1,8 +1,8 @@
 import { recipes } from "../recipes.js";
 import { listTag } from "./listDisplay.js";
-import createBoxTags from "./tagDisplay.js";
 import RecipeDisplay from "./recipesDisplay.js";
 import filterTagsbyInputTag from "./searchItem.js";
+import tagDisplay from "./tagDisplay.js";
 
 export default function globalSearch() {
   document.getElementById("search").addEventListener("input", (e) => {
@@ -38,7 +38,7 @@ export default function globalSearch() {
       });
 
       resultCardRecipes(results);
-      new createBoxTags();
+      tagDisplay.createBoxTags();
       tagFromSearch(results);
       filterTagsbyInputTag();
     }
@@ -107,7 +107,7 @@ function tagFromSearch(results) {
   reducedUstensils.forEach((element) => {
     document.querySelector(".search-list-ustensils").append(listTag(element, "ustensils"));
   });
-  new createBoxTags();
+  tagDisplay.createBoxTags();
 }
 
 const inputSearch = document.getElementById("search");

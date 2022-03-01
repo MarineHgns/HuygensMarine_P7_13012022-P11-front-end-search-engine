@@ -10,6 +10,7 @@ export default class tagDisplay {
 
     for (let i = 0; i < listItemIngredients.length; i++) {
       listItemIngredients[i].addEventListener("click", () => {
+        alert("ok");
         miniTags.style.display = "block";
         listItemIngredients[i].style.display = "none";
         const tagBox = new displayTag(listItemIngredients[i].innerText, "ingredients");
