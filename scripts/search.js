@@ -50,22 +50,22 @@ export default function globalSearch() {
       let results = [];
 
       if (resultIndex >= 0) {
-        let resultIndexWordAfter = newTabFinal[resultIndex + 1].word;
-        let resultIndexWordPrevious = newTabFinal[resultIndex - 1].word;
         let tabResult = [];
-        let tabTab = [];
 
-        if (resultIndex >= 0 && resultIndexWordAfter.includes(x)) {
-          tabResult.push([resultIndex + 1]);
-          if (resultIndex >= 0 && resultIndexWordPrevious.includes(x)) {
-            tabResult.push([resultIndex - 1]);
+        if (resultIndex >= 0) {
+          for (let i = resultIndex + 1; newTabFinal[i].word.includes(x); i++) {
+            tabResult.push([i]);
           }
+        }
+
+        if (resultIndex >= 0 && newTabFinal[resultIndex - 1].word.includes(x)) {
+          tabResult.push([resultIndex - 1]);
         }
 
         tabResult.push([newTabFinal[middle].word.indexOf(x) !== 0 ? -1 : middle]);
 
         tabResult.map((e) => {
-          tabTab = newTabFinal[e].id;
+          let tabTab = newTabFinal[e].id;
           tabTab.forEach((res) => {
             res = !res ? recipes : recipes.filter((el) => el.id == res);
             finalResult.push(...res);
@@ -77,7 +77,6 @@ export default function globalSearch() {
         results = finalResult;
       } else if (resultIndex <= -1) {
         results = finalResult;
-        console.log("no results");
       }
 
       finalResult = [];
