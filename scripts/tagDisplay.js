@@ -1,7 +1,3 @@
-// import globalSearch from "./search.js";
-// import SearchTag from "./searchTag.js";
-// import UpdateAfterRemoveTag from "./UpdateAfterRemoveTag.js";
-
 import search, { updateAfterTagRemoved } from "./search.js";
 import { UpdateItemsList } from "./search.js";
 
