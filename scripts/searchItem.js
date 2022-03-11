@@ -2,18 +2,16 @@ export default function filterTagsbyInputTag() {
   // ingredients
   let listIngredients = document.querySelectorAll(".search-item-ingredients");
 
-  document
-    .getElementById("search-ingredients")
-    .addEventListener("input", (e) => {
-      for (let ing of listIngredients) {
-        let item = ing.innerHTML.toLowerCase();
-        if (item.indexOf(e.target.value.toLowerCase()) == -1) {
-          ing.style.display = "none";
-        } else {
-          ing.style.display = "";
-        }
+  document.getElementById("search-ingredients").addEventListener("input", (e) => {
+    for (let ing of listIngredients) {
+      let item = ing.innerHTML.toLowerCase();
+      if (item.indexOf(e.target.value.toLowerCase()) == -1) {
+        ing.style.display = "none";
+      } else {
+        ing.style.display = "";
       }
-    });
+    }
+  });
 
   // appliances
   let listAppliances = document.querySelectorAll(".search-item-appliance");
