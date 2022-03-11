@@ -1,5 +1,9 @@
-import SearchTag from "./searchTag.js";
-import UpdateAfterRemoveTag from "./UpdateAfterRemoveTag.js";
+// import globalSearch from "./search.js";
+// import SearchTag from "./searchTag.js";
+// import UpdateAfterRemoveTag from "./UpdateAfterRemoveTag.js";
+
+import search, { updateAfterTagRemoved } from "./search.js";
+import { UpdateItemsList } from "./search.js";
 
 export default class tagDisplay {
   static createBoxTags() {
@@ -10,14 +14,13 @@ export default class tagDisplay {
 
     for (let i = 0; i < listItemIngredients.length; i++) {
       listItemIngredients[i].addEventListener("click", () => {
-        alert("ok");
         miniTags.style.display = "block";
         listItemIngredients[i].style.display = "none";
         const tagBox = new displayTag(listItemIngredients[i].innerText, "ingredients");
         tagBox.classList.add("tag-ingredient");
         miniTags.appendChild(tagBox);
         tagBox.classList.add("selected");
-        SearchTag("ingredients", listItemIngredients[i].innerText.toLowerCase());
+        search("ingredients", listItemIngredients[i].innerText.toLowerCase());
         removeTag();
       });
     }
@@ -32,7 +35,7 @@ export default class tagDisplay {
         tagBox.classList.add("tag-appliances");
         miniTags.appendChild(tagBox);
         tagBox.classList.add("selected");
-        SearchTag("appliance", listItemAppliances[i].innerText.toLowerCase());
+        search("appliance", listItemAppliances[i].innerText.toLowerCase());
         removeTag();
       });
     }
@@ -48,7 +51,7 @@ export default class tagDisplay {
         tagBox.classList.add("tag-ustensils");
         miniTags.appendChild(tagBox);
         tagBox.classList.add("selected");
-        SearchTag("ustensils", listItemUstensils[i].innerText.toLowerCase());
+        search("ustensils", listItemUstensils[i].innerText.toLowerCase());
         removeTag();
       });
     }
@@ -75,9 +78,10 @@ export default class tagDisplay {
           removeTag[x].addEventListener("click", () => {
             removeTag[x].classList.remove("selected");
             removeTag[x].remove();
-            UpdateAfterRemoveTag();
+            updateAfterTagRemoved();
+
             if (document.querySelectorAll(".tag-box").length == 0) {
-              tagDisplay.createBoxTags();
+              search();
             }
           });
       }
