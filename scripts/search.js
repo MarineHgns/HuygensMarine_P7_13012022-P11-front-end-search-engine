@@ -3,6 +3,7 @@ import { listTag } from "./listDisplay.js";
 import RecipeDisplay from "./recipesDisplay.js";
 import filterTagsbyInputTag from "./searchItem.js";
 import tagDisplay from "./tagDisplay.js";
+import { tabFinalRecipes } from "./binarySearch.js";
 
 let tagsSelected = [];
 let totalSelected = [];
@@ -12,10 +13,7 @@ let resultFinal = [];
 let resultRecipesMiniTags = [];
 let lastResultTotalMiniTags = [];
 let totalMiniTags = [];
-let listMiniTags;
-let resultsTag = [];
 let valueLowCase = [];
-let stockTag = [];
 
 export default function search(dataValue, value) {
   tagsSelected = document.querySelectorAll(".selected");
@@ -47,10 +45,8 @@ export default function search(dataValue, value) {
     });
 
     totalMiniTags = uniqueList(totalMiniTags, "datavalue");
-    stockTag = uniqueList(totalMiniTags, "datavalue");
     lastResultTotalMiniTags.push(...totalMiniTags);
     valueLowCase = value;
-    stockTag.push({ value: valueLowCase });
 
     if (totalSelected.length > 0) {
       switch (dataValue) {
@@ -82,7 +78,6 @@ export default function search(dataValue, value) {
     tagsSelected = [];
 
     tagsSelected = document.querySelectorAll(".selected");
-
     tagsSelected.forEach((tagsSelected) => {
       totalSelected.push(tagsSelected.innerText);
       for (let i = 0; i < totalSelected.length; i++) {
@@ -118,8 +113,14 @@ export default function search(dataValue, value) {
   if ((tagsSelected.length >= 1 && inputValue.length == 2) || (tagsSelected.length >= 1 && inputValue.length == 1)) {
     totalSelected = [];
     deleteItem();
-    stockTag.forEach((el) => {
-      totalSelected.push(el.value);
+    tagsSelected = [];
+
+    tagsSelected = document.querySelectorAll(".selected");
+    tagsSelected.forEach((tagsSelected) => {
+      let tags = tagsSelected.innerText.toLowerCase().split(" ");
+      tags.splice(1);
+      totalSelected.push(tags);
+
       for (let i = 0; i < totalSelected.length; i++) {
         totalMiniTags.push(
           ...[
@@ -132,20 +133,18 @@ export default function search(dataValue, value) {
     });
 
     totalMiniTags = uniqueList(totalMiniTags, "datavalue");
-
-    valueLowCase = [];
-    stockTag.forEach((el) => {
-      valueLowCase = el.value;
-    });
+    valueLowCase = totalSelected;
 
     resultRecipesMiniTags = recipes.filter(
       (obj) =>
-        obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase() === valueLowCase) ||
+        obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(valueLowCase)) ||
         obj.appliance.toLowerCase() === valueLowCase ||
         obj.ustensils.find((ustensil) => ustensil.toLowerCase() === valueLowCase)
     );
 
+    resultFinal = [];
     resultFinal.push(...resultRecipesMiniTags);
+    results = [];
     results = [...new Set(resultFinal)];
 
     UpdateItemsList(results);
@@ -174,7 +173,7 @@ export default function search(dataValue, value) {
     resultFinal = [];
     deleteItem();
 
-    let resultsInput = results.filter((obj) => {
+    results = results.filter((obj) => {
       return (
         obj.name.toLowerCase().includes(inputValue) ||
         obj.description.toLowerCase().includes(inputValue) ||
@@ -204,14 +203,14 @@ export default function search(dataValue, value) {
     totalMiniTags = uniqueList(totalMiniTags, "datavalue");
     lastResultTotalMiniTags.push(...totalMiniTags);
     valueLowCase = value;
+    resultRecipesMiniTags = [];
 
     if (totalSelected.length > 0) {
       switch (dataValue) {
         case "ingredients":
-          resultRecipesMiniTags = resultsInput.filter((obj) =>
-            obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase() === valueLowCase)
-          );
+          resultRecipesMiniTags = results.filter((obj) => obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase() === valueLowCase));
           resultFinal.push(...resultRecipesMiniTags);
+          results = resultFinal;
           break;
 
         case "appliance":
@@ -225,11 +224,8 @@ export default function search(dataValue, value) {
           break;
       }
 
-      resultsTag = [...new Set(resultFinal)];
+      results = [...new Set(results)];
     }
-
-    results = [];
-    results.push(...resultsTag);
 
     UpdateItemsList(results);
     results = [...new Set(results)];
@@ -318,16 +314,14 @@ export function updateAfterTagRemoved(dataValue) {
   });
 
   totalMiniTags = uniqueList(totalMiniTags, "datavalue");
-
-  valueLowCase = totalSelected;
-
-  resultRecipesMiniTags = recipes.filter(
-    (obj) =>
-      obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(valueLowCase)) ||
-      obj.appliance.toLowerCase() === valueLowCase ||
-      obj.ustensils.find((ustensil) => ustensil.toLowerCase() === valueLowCase)
-  );
-
+  totalSelected.forEach((el) => {
+    resultRecipesMiniTags = recipes.filter(
+      (obj) =>
+        obj.ingredients.find((ingredient) => ingredient.ingredient.toLowerCase().includes(el)) ||
+        obj.appliance.toLowerCase().includes(el) ||
+        obj.ustensils.find((ustensil) => ustensil.toLowerCase().includes(el))
+    );
+  });
   resultFinal = [];
   resultFinal.push(...resultRecipesMiniTags);
 
