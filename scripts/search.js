@@ -265,12 +265,12 @@ export default function search(dataValue, value) {
           break;
 
         case "appliance":
-          resultRecipesMiniTags = resultsInput.filter((obj) => obj.appliance.toLowerCase() === valueLowCase);
+          resultRecipesMiniTags = results.filter((obj) => obj.appliance.toLowerCase() === valueLowCase);
           resultFinal.push(...resultRecipesMiniTags);
           break;
 
         case "ustensils":
-          resultRecipesMiniTags = resultsInput.filter((obj) => obj.ustensils.find((ustensil) => ustensil.toLowerCase() === valueLowCase));
+          resultRecipesMiniTags = results.filter((obj) => obj.ustensils.find((ustensil) => ustensil.toLowerCase() === valueLowCase));
           resultFinal.push(...resultRecipesMiniTags);
           break;
       }
@@ -381,6 +381,7 @@ export function updateAfterTagRemoved(dataValue) {
 
   resultCardRecipes(results);
   UpdateItemsList(results);
+  tagDisplay.createBoxTags();
 }
 
 function deleteItem() {
